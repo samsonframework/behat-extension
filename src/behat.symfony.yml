@@ -1,5 +1,5 @@
-# behat.yml
-default:
+# behat.generic.yml
+default: &DEFAULT
   autoload:
     '': %paths.base%/features/bootstrap
   translation:
