@@ -10,6 +10,7 @@ SamsonFramework Behat extension package and generic feature context
 [![Total Downloads](https://poser.pugx.org/samsonframework/behat-extension/downloads.svg)](https://packagist.org/packages/samsonframework/behat-extension)
 [![StyleCI](https://styleci.io/repos/77138455/shield?branch=master)](https://styleci.io/repos/77138455)
 [![Stories in Ready](https://badge.waffle.io/samsonframework/behat-extension.png?label=ready&title=Ready)](https://waffle.io/samsonframework/behat-extension)
+[![Inline docs](http://inch-ci.org/github/samsonframework/behat-extension.svg?branch=master)](http://inch-ci.org/github/samsonframework/behat-extension)
 
 ##Documentation
 Follow [official documentation](http://github.com/samsonframework/behat-extension/blob/master/docs/Index.md).
