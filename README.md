@@ -2,17 +2,17 @@
  
 SamsonFramework Behat extension package and generic feature context
 
-[![Latest Stable Version](https://poser.pugx.org/samsonframework/jenkins-ci/v/stable.svg)](https://packagist.org/packages/samsonframework/jenkins-ci)
-[![Build Status](https://scrutinizer-ci.com/g/samsonframework/jenkins-ci/badges/build.png?b=master)](https://scrutinizer-ci.com/g/samsonframework/jenkins-ci/build-status/master)
-[![Coverage Status](https://coveralls.io/repos/github/samsonframework/jenkins-ci/badge.svg?branch=master)](https://coveralls.io/github/samsonframework/jenkins-ci?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samsonframework/jenkins-ci/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/samsonframework/jenkins-ci/?branch=master)
-[![Code Climate](https://codeclimate.com/github/samsonframework/jenkins-ci/badges/gpa.svg)](https://codeclimate.com/github/samsonframework/jenkins-ci)
-[![Total Downloads](https://poser.pugx.org/samsonframework/jenkins-ci/downloads.svg)](https://packagist.org/packages/samsonframework/jenkins-ci)
+[![Latest Stable Version](https://poser.pugx.org/samsonframework/behat-extension/v/stable.svg)](https://packagist.org/packages/samsonframework/behat-extension)
+[![Build Status](https://scrutinizer-ci.com/g/samsonframework/behat-extension/badges/build.png?b=master)](https://scrutinizer-ci.com/g/samsonframework/behat-extension/build-status/master)
+[![Coverage Status](https://coveralls.io/repos/github/samsonframework/behat-extension/badge.svg?branch=master)](https://coveralls.io/github/samsonframework/behat-extension?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samsonframework/behat-extension/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/samsonframework/behat-extension/?branch=master)
+[![Code Climate](https://codeclimate.com/github/samsonframework/behat-extension/badges/gpa.svg)](https://codeclimate.com/github/samsonframework/behat-extension)
+[![Total Downloads](https://poser.pugx.org/samsonframework/behat-extension/downloads.svg)](https://packagist.org/packages/samsonframework/behat-extension)
 [![StyleCI](https://styleci.io/repos/67337167/shield)](https://styleci.io/repos/67337167)
-[![Stories in Ready](https://badge.waffle.io/samsonframework/jenkins-ci.png?label=ready&title=Ready)](https://waffle.io/samsonframework/jenkins-ci)
+[![Stories in Ready](https://badge.waffle.io/samsonframework/behat-extension.png?label=ready&title=Ready)](https://waffle.io/samsonframework/behat-extension)
 
 ##Documentation
-Follow [official documentation](http://github.com/samsonframework/jenkins-ci/blob/master/docs/Index.md).
+Follow [official documentation](http://github.com/samsonframework/behat-extension/blob/master/docs/Index.md).
 
 ##Installation
 You can install this package through Composer:
