@@ -1,0 +1,211 @@
+<?php declare(strict_types=1);
+namespace samsonframework\behatextension;
+
+use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
+use \Behat\MinkExtension\Context\MinkContext;
+
+/**
+ * Defines generic feature steps
+ */
+class GenericFeature extends MinkContext
+{
+    /** @var int UI delay interval (ms) */
+    const DELAY = 1000;
+
+    /** @var Session */
+    protected $session;
+
+    /**
+     * Initializes context.
+     *
+     * Every scenario gets its own context instance.
+     * You can also pass arbitrary arguments to the
+     * context constructor through behat.yml.
+     *
+     * @param Session $session
+     */
+    public function __construct(Session $session = null)
+    {
+        $this->session = $session;
+
+        ini_set('xdebug.max_nesting_level', 1000);
+    }
+
+    /**
+     * @When /^I hover over the element "([^"]*)"$/
+     *
+     * @param string $selector CSS element selector
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function iHoverOverTheElement(string $selector)
+    {
+        $this->findByCssSelector($selector)->mouseOver();
+    }
+
+    /**
+     * @AfterStep
+     *
+     * @param AfterStepScope $scope
+     */
+    public function takeScreenShotAfterFailedStep(AfterStepScope $scope)
+    {
+        if (99 === $scope->getTestResult()->getResultCode()) {
+            $driver = $this->getSession()->getDriver();
+
+            if (!($driver instanceof Selenium2Driver)) {
+                return;
+            }
+
+            $step = $scope->getStep();
+            $fileName = 'Fail.' . preg_replace('/[^a-zA-Z0-9-_\.]/', '_', $scope->getName() . '-' . $step->getText()) . '.jpg';
+            file_put_contents($fileName, $driver->getScreenshot());
+        }
+    }
+
+    /**
+     * @Given /^I set browser window size to "([^"]*)" x "([^"]*)"$/
+     *
+     * @param int $width Browser window width
+     * @param int $height Browser window height
+     */
+    public function iSetBrowserWindowSizeToX($width, $height)
+    {
+        $this->getSession()->resizeWindow((int)$width, (int)$height, 'current');
+    }
+
+    /**
+     * @Given /^I wait "([^"]*)" milliseconds for response$/
+     *
+     * @param int $delay Amount of milliseconds to wait
+     */
+    public function iWaitMillisecondsForResponse($delay = self::DELAY)
+    {
+        $this->getSession()->wait((int)$delay);
+    }
+
+    /**
+     * Click on the element with the provided xpath query
+     *
+     * @When I click on the element :arg1
+     *
+     * @param string $selector CSS element selector
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function iClickOnTheElement(string $selector)
+    {
+        // Click on the founded element
+        $this->findByCssSelector($selector)->click();
+    }
+
+    /**
+     * Find element by CSS selector.
+     *
+     * @param string $selector CSS selector
+     *
+     * @throws \InvalidArgumentException If element not found
+     *
+     * @return \Behat\Mink\Element\NodeElement
+     */
+    protected function findByCssSelector(string $selector) : NodeElement
+    {
+        return $this->findAllByCssSelector($selector)[0];
+    }
+
+    /**
+     * Find all elements by CSS selector.
+     *
+     * @param string $selector CSS selector
+     *
+     * @throws \InvalidArgumentException If element not found
+     *
+     * @return \Behat\Mink\Element\NodeElement[]
+     */
+    protected function findAllByCssSelector(string $selector)
+    {
+        $session = $this->getSession();
+
+        $elements = $session->getPage()->findAll('css', $this->fixStepArgument($selector));
+
+        // If element with current selector is not found then print error
+        if (count($elements) === 0) {
+            throw new \InvalidArgumentException(sprintf('Could not evaluate CSS selector: "%s"', $selector));
+        }
+
+        return $elements;
+    }
+
+    /**
+     * Fill in input with the provided info
+     *
+     * @When I fill in the input :arg1 with :arg2
+     *
+     * @param string $selector CSS element selector
+     * @param string $value    Element value for filling in
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function iFillInTheElement(string $selector, string $value)
+    {
+        $this->findByCssSelector($selector)->setValue($this->fixStepArgument($value));
+    }
+
+    /**
+     * @When I scroll vertically to :arg1 px
+     *
+     * @param mixed $yPos Vertical scrolling position in pixels
+     */
+    public function iScrollVerticallyToPx($yPos)
+    {
+        $this->getSession()->executeScript('window.scrollTo(0, Math.min(document.documentElement.scrollHeight, document.body.scrollHeight, ' . ((int)$yPos) . '));');
+    }
+
+    /**
+     * @When I scroll horizontally to :arg1 px
+     *
+     * @param mixed $xPos Horizontal scrolling position in pixels
+     */
+    public function iScrollHorizontallyToPx($xPos)
+    {
+        $this->getSession()->executeScript('window.scrollTo(' . ((int)$xPos) . ', 0);');
+    }
+
+    /**
+     * @Given /^I fill hidden field "([^"]*)" with "([^"]*)"$/
+     *
+     * @param string $field Field name
+     * @param string $value Field value
+     */
+    public function iFillHiddenFieldWith(string $field, string $value)
+    {
+        // TODO: Change to Mink implementation
+        $this->getSession()->executeScript("
+            $('input[name=" . $field . "]').val('" . $value . "');
+        ");
+    }
+
+    /**
+     * @Then I check custom checkbox with :id
+     *
+     * @param string $id Checkbox identifier
+     *
+     * @throws \InvalidArgumentException If checkbox with provided identifier does not exists
+     */
+    public function iCheckCustomCheckboxWith(string $id)
+    {
+        // Find label for checkbox by chekbox identifier
+        $element = null;
+        foreach ($this->findAllByCssSelector('label') as $label) {
+            if ($label->getAttribute('for') === $id) {
+                $element = $label;
+            }
+        }
+
+        // Imitate checkbox checking by clicking its label
+        $element->click();
+    }
+}
