@@ -223,6 +223,6 @@ class GenericFeature extends MinkContext
     {
         $this->findByCssSelector($selector)->dragTo($this->findByCssSelector($target));
 
-        $this->iWaitMillisecondsForResponse(self::DELAY/5);
+        $this->iWaitMillisecondsForResponse(self::JS_DELAY);
     }
 }
