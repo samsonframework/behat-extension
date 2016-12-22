@@ -41,15 +41,14 @@ default:
 ```
 
 Where you need to specify:
- * Your context class(es) under ```default->suites->default->contexts``` section, in our example this is
- ```yourproject\behat\FeatureContext```
- > ```session``` parameter with ```'@session'`` is for passing Symfony session object and needed only if your
+ * Your context class(es) name under ```default->suites->default->contexts``` section, in our example this is
+ ```yourproject\behat\FeatureContext```. ```session``` parameter with ```'@session'`` is for passing Symfony session object and needed only if your
   ```FeatureContext``` class extends ```\samsonframework\behatextension\GenericFeatureContext```
  
  * Your ```base_url``` of configured domain for testing
  
  
-# Creating project related contexts
+# Creating other project related contexts
 For creating separate project related feature context to have a beautiful classes structure you should create
   new feature context classes in the same name to give ability Behat to use composer PSR-4 autoloading feature,
   for example if you want to create OrderFeatureContext class then you need to repeat same steps as described in
