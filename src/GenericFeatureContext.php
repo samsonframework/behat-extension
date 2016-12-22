@@ -4,7 +4,6 @@ namespace samsonframework\behatextension;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Session;
 use \Behat\MinkExtension\Context\MinkContext;
 
 /**
@@ -17,7 +16,7 @@ class GenericFeatureContext extends MinkContext
     /** @var int UI javascript generic delay duration in milliseconds */
     const JS_DELAY = self::DELAY / 5;
 
-    /** @var Session */
+    /** @var mixed */
     protected $session;
 
     /**
@@ -27,13 +26,13 @@ class GenericFeatureContext extends MinkContext
      * You can also pass arbitrary arguments to the
      * context constructor through behat.yml.
      *
-     * @param Session $session
+     * @param mixed $session
      */
-    public function __construct(Session $session = null)
+    public function __construct($session = null)
     {
         $this->session = $session;
 
-        ini_set('xdebug.max_nesting_level', 1000);
+        ini_set('xdebug.max_nesting_level', '1000');
     }
 
     /**
