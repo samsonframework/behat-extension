@@ -1,0 +1,33 @@
+{
+  "name": "samsonframework/behat-extension",
+  "description": "SamsonFramework Behat generic features,steps and extenstions",
+  "keywords": [
+    "samsonframework",
+    "behat",
+    "bdd",
+    "behat features",
+    "behat steps"
+  ],
+  "authors": [
+    {
+      "name": "Vitaly Iegorov",
+      "email": "egorov@samsonos.com"
+    }
+  ],
+  "require": {
+    "behat/behat": "~3.0@stable",
+    "behat/mink-extension": "~2.0",
+    "behat/mink-selenium2-driver": "@stable",
+    "behat/symfony2-extension":"*",
+    "behat/mink-browserkit-driver": "~1.2",
+    "phpunit/phpunit": "5.*"
+  },
+  "license": "Open Software License (OSL) v 3.0",
+  "homepage": "http://samsonos.com/",
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.x-dev"
+    }
+  }
+}
+
