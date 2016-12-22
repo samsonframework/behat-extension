@@ -1,12 +1,15 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 /**
  * Created by Vitaly Iegorov <egorov@samsonos.com>.
- * on 22.12.16 at 18:16
+ * on 22.12.16 at 18:16.
  */
+
 namespace samsonframework\behatextension\tests;
 
 /**
- * Class TestCase
+ * Class TestCase.
  *
  * @author Vitaly Egorov <egorov@samsonos.com>
  */
