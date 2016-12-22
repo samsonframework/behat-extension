@@ -1,13 +1,16 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace samsonframework\behatextension;
 
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
-use \Behat\MinkExtension\Context\MinkContext;
+use Behat\MinkExtension\Context\MinkContext;
 
 /**
- * Defines generic feature steps
+ * Defines generic feature steps.
  */
 class GenericFeatureContext extends MinkContext
 {
@@ -50,7 +53,7 @@ class GenericFeatureContext extends MinkContext
             }
 
             $step = $scope->getStep();
-            $fileName = 'Fail.' . preg_replace('/[^a-zA-Z0-9-_\.]/', '_', $scope->getName() . '-' . $step->getText()) . '.jpg';
+            $fileName = 'Fail.'.preg_replace('/[^a-zA-Z0-9-_\.]/', '_', $scope->getName().'-'.$step->getText()).'.jpg';
             file_put_contents($fileName, $driver->getScreenshot());
         }
     }
@@ -95,12 +98,12 @@ class GenericFeatureContext extends MinkContext
     /**
      * @Given /^I set browser window size to "([^"]*)" x "([^"]*)"$/
      *
-     * @param int $width Browser window width
+     * @param int $width  Browser window width
      * @param int $height Browser window height
      */
     public function iSetBrowserWindowSizeToX($width, $height)
     {
-        $this->getSession()->resizeWindow((int)$width, (int)$height, 'current');
+        $this->getSession()->resizeWindow((int) $width, (int) $height, 'current');
     }
 
     /**
@@ -110,11 +113,11 @@ class GenericFeatureContext extends MinkContext
      */
     public function iWaitMillisecondsForResponse($delay = self::DELAY)
     {
-        $this->getSession()->wait((int)$delay);
+        $this->getSession()->wait((int) $delay);
     }
 
     /**
-     * Click on the element with the provided xpath query
+     * Click on the element with the provided xpath query.
      *
      * @When I click on the element :arg1
      *
@@ -141,7 +144,7 @@ class GenericFeatureContext extends MinkContext
     }
 
     /**
-     * Fill in input with the provided info
+     * Fill in input with the provided info.
      *
      * @When I fill in the input :arg1 with :arg2
      *
@@ -162,7 +165,7 @@ class GenericFeatureContext extends MinkContext
      */
     public function iScrollVerticallyToPx($yPos)
     {
-        $this->getSession()->executeScript('window.scrollTo(0, Math.min(document.documentElement.scrollHeight, document.body.scrollHeight, ' . ((int)$yPos) . '));');
+        $this->getSession()->executeScript('window.scrollTo(0, Math.min(document.documentElement.scrollHeight, document.body.scrollHeight, '.((int) $yPos).'));');
     }
 
     /**
@@ -172,7 +175,7 @@ class GenericFeatureContext extends MinkContext
      */
     public function iScrollHorizontallyToPx($xPos)
     {
-        $this->getSession()->executeScript('window.scrollTo(' . ((int)$xPos) . ', 0);');
+        $this->getSession()->executeScript('window.scrollTo('.((int) $xPos).', 0);');
     }
 
     /**
@@ -185,7 +188,7 @@ class GenericFeatureContext extends MinkContext
     {
         // TODO: Change to Mink implementation
         $this->getSession()->executeScript("
-            $('input[name=" . $field . "]').val('" . $value . "');
+            $('input[name=".$field."]').val('".$value."');
         ");
     }
 
@@ -214,7 +217,7 @@ class GenericFeatureContext extends MinkContext
      * @Then I drag element :selector to :target
      *
      * @param string $selector Source element for dragging
-     * @param string $target Target element to drag to
+     * @param string $target   Target element to drag to
      *
      * @throws \InvalidArgumentException
      */
