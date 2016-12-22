@@ -1,0 +1,23 @@
+# behat.yml
+default:
+  autoload:
+    '': %paths.base%/features/bootstrap
+  translation:
+    locale: en
+  gherkin:
+    cache: ~
+  suites:
+    default:
+      paths: [%paths.base%/features]
+      mink_session: default #SymfonySession important!
+      contexts:
+        - FeatureContext:
+            session:   '@session'
+
+  extensions:
+    Behat\Symfony2Extension: ~
+    Behat\MinkExtension:
+      files_path: %paths.base%/features/bootstrap/images/
+      sessions:
+        symfony2:
+          symfony2: ~
