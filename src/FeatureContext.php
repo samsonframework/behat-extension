@@ -12,8 +12,10 @@ use \Behat\MinkExtension\Context\MinkContext;
  */
 class GenericFeature extends MinkContext
 {
-    /** @var int UI delay interval (ms) */
+    /** @var int UI generic delay duration in milliseconds */
     const DELAY = 1000;
+    /** @var int UI javascript generic delay duration in milliseconds */
+    const JS_DELAY = self::DELAY / 5;
 
     /** @var Session */
     protected $session;
@@ -35,18 +37,6 @@ class GenericFeature extends MinkContext
     }
 
     /**
-     * @When /^I hover over the element "([^"]*)"$/
-     *
-     * @param string $selector CSS element selector
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function iHoverOverTheElement(string $selector)
-    {
-        $this->findByCssSelector($selector)->mouseOver();
-    }
-
-    /**
      * @AfterStep
      *
      * @param AfterStepScope $scope
@@ -64,6 +54,43 @@ class GenericFeature extends MinkContext
             $fileName = 'Fail.' . preg_replace('/[^a-zA-Z0-9-_\.]/', '_', $scope->getName() . '-' . $step->getText()) . '.jpg';
             file_put_contents($fileName, $driver->getScreenshot());
         }
+    }
+
+    /**
+     * Find all elements by CSS selector.
+     *
+     * @param string $selector CSS selector
+     *
+     * @throws \InvalidArgumentException If element not found
+     *
+     * @return \Behat\Mink\Element\NodeElement[]
+     */
+    protected function findAllByCssSelector(string $selector)
+    {
+        $session = $this->getSession();
+
+        $elements = $session->getPage()->findAll('css', $this->fixStepArgument($selector));
+
+        // If element with current selector is not found then print error
+        if (count($elements) === 0) {
+            throw new \InvalidArgumentException(sprintf('Could not evaluate CSS selector: "%s"', $selector));
+        }
+
+        return $elements;
+    }
+
+    /**
+     * Find element by CSS selector.
+     *
+     * @param string $selector CSS selector
+     *
+     * @throws \InvalidArgumentException If element not found
+     *
+     * @return \Behat\Mink\Element\NodeElement
+     */
+    protected function findByCssSelector(string $selector) : NodeElement
+    {
+        return $this->findAllByCssSelector($selector)[0];
     }
 
     /**
@@ -103,40 +130,15 @@ class GenericFeature extends MinkContext
     }
 
     /**
-     * Find element by CSS selector.
+     * @When /^I hover over the element "([^"]*)"$/
      *
-     * @param string $selector CSS selector
+     * @param string $selector CSS element selector
      *
-     * @throws \InvalidArgumentException If element not found
-     *
-     * @return \Behat\Mink\Element\NodeElement
+     * @throws \InvalidArgumentException
      */
-    protected function findByCssSelector(string $selector) : NodeElement
+    public function iHoverOverTheElement(string $selector)
     {
-        return $this->findAllByCssSelector($selector)[0];
-    }
-
-    /**
-     * Find all elements by CSS selector.
-     *
-     * @param string $selector CSS selector
-     *
-     * @throws \InvalidArgumentException If element not found
-     *
-     * @return \Behat\Mink\Element\NodeElement[]
-     */
-    protected function findAllByCssSelector(string $selector)
-    {
-        $session = $this->getSession();
-
-        $elements = $session->getPage()->findAll('css', $this->fixStepArgument($selector));
-
-        // If element with current selector is not found then print error
-        if (count($elements) === 0) {
-            throw new \InvalidArgumentException(sprintf('Could not evaluate CSS selector: "%s"', $selector));
-        }
-
-        return $elements;
+        $this->findByCssSelector($selector)->mouseOver();
     }
 
     /**
@@ -207,5 +209,20 @@ class GenericFeature extends MinkContext
 
         // Imitate checkbox checking by clicking its label
         $element->click();
+    }
+
+    /**
+     * @Then I drag element :selector to :target
+     *
+     * @param string $selector Source element for dragging
+     * @param string $target Target element to drag to
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function dragElementTo(string $selector, string $target)
+    {
+        $this->findByCssSelector($selector)->dragTo($this->findByCssSelector($target));
+
+        $this->iWaitMillisecondsForResponse(self::DELAY/5);
     }
 }
