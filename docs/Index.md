@@ -4,6 +4,7 @@
 * Create ```FeatureContext.php``` class in ```features/bootstrap``` with namespace ```yourproject/behat```:
 
 ```php
+#features/bootstrap/FeatureContext.php
 declare(strict_types=1);
 
 namespace yourproject\behat;
@@ -15,6 +16,7 @@ class FeatureContext extends \samsonframework\behatextension\GenericFeatureConte
 > You can actually use any classname and namespace
 
 * Add autoload section for PSR-4 into your projects ```composer.json```:
+#composer.json
 ```json
 "psr-4": {
   "yourproject\\behat\\": "features/bootstrap"
