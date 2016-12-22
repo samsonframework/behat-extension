@@ -45,3 +45,10 @@ Where you need to specify:
   ```FeatureContext``` class extends ```\samsonframework\behatextension\GenericFeatureContext```
  
  * Your ```base_url``` of configured domain for testing
+ 
+ 
+# Creating project related contexts
+For creating separate project related feature context to have a beautiful classes structure you should create
+  new feature context classes in the same name to give ability Behat to use composer PSR-4 autoloading feature,
+  for example if you want to create OrderFeatureContext class then you need to repeat same steps as described in
+  installation section of this document for new FeatureContextFile except changing ```composer.json```
