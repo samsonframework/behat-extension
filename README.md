@@ -8,7 +8,7 @@ SamsonFramework Behat extension package and generic feature context
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samsonframework/behat-extension/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/samsonframework/behat-extension/?branch=master)
 [![Code Climate](https://codeclimate.com/github/samsonframework/behat-extension/badges/gpa.svg)](https://codeclimate.com/github/samsonframework/behat-extension)
 [![Total Downloads](https://poser.pugx.org/samsonframework/behat-extension/downloads.svg)](https://packagist.org/packages/samsonframework/behat-extension)
-[![StyleCI](https://styleci.io/repos/67337167/shield)](https://styleci.io/repos/67337167)
+[![StyleCI](https://styleci.io/repos/77138455/shield?branch=master)](https://styleci.io/repos/77138455)
 [![Stories in Ready](https://badge.waffle.io/samsonframework/behat-extension.png?label=ready&title=Ready)](https://waffle.io/samsonframework/behat-extension)
 
 ##Documentation
