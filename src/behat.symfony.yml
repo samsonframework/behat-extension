@@ -1,7 +1,8 @@
 # behat.generic.yml
 default: &DEFAULT
   autoload:
-    '': %paths.base%/features/bootstrap
+   - %paths.base%/features/bootstrap
+   - vendor/samsonframework/behat-extension/src
   translation:
     locale: en
   gherkin:
@@ -12,6 +13,8 @@ default: &DEFAULT
       mink_session: default #SymfonySession important!
       contexts:
         - FeatureContext:
+            session:   '@session'
+        - GenericFeatureContext:
             session:   '@session'
 
   extensions:

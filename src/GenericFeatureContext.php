@@ -10,7 +10,7 @@ use \Behat\MinkExtension\Context\MinkContext;
 /**
  * Defines generic feature steps
  */
-class GenericFeature extends MinkContext
+class GenericFeatureContext extends MinkContext
 {
     /** @var int UI generic delay duration in milliseconds */
     const DELAY = 1000;
