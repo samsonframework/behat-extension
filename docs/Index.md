@@ -43,6 +43,7 @@ default:
 Where you need to specify:
  * Your context class(es) name under ```default->suites->default->contexts``` section, in our example this is
  ```yourproject\behat\FeatureContext```. 
+ 
  > ```session``` parameter with ```'@session'``` is for passing Symfony session object and needed only if your
   ```FeatureContext``` class extends ```\samsonframework\behatextension\GenericFeatureContext```
  
