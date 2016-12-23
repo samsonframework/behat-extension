@@ -55,7 +55,7 @@ for example if you want to create OrderFeatureContext class then you need to rep
 installation section of this document for new FeatureContext file except changing ```composer.json```.
 
 > You should decide if you need step definitions from ```\samsonframework\behatextension\GenericFeatureContext``` and
-if yes then you can just extend you FeatureContext class in other created FeatureContext classes, this will give you ability to create generic project related steps definition in one place.
+> if yes then you can just extend you FeatureContext class in other created FeatureContext classes, this will give you ability to create generic project related steps definition in one place.
 
 # Generic functions and step definitions
 
