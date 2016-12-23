@@ -78,7 +78,7 @@ Special Behat after step hook for screenshot creation after failed step.
 ```iClickOnTheElement(string $selector)```
 
 ## Wait X milliseconds for response
-Ususally when creating automated tests we need a delay for loading and updating, this step defenition can take ```$delay```
+Usually when creating automated tests we need a delay for loading and updating, this step defenition can take ```$delay```
 argument in milliseconds but by default it uses ```GenericFeatureContext::DELAY``` constant.
 > I wait $delay milliseconds for response
 ```iWaitMillisecondsForResponse($delay = self::DELAY)```
