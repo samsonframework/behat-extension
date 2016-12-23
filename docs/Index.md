@@ -68,47 +68,58 @@ Function: ```findAllByCssSelector(string $selector):NodeElement[]```
 Function: ```findByCssSelector(string $selector):NodeElement```
 
 ## Change browser window size
-> I set browser window size to $width x $height 
+> I set browser window size to $width x $height.
+
 Function: ```iSetBrowserWindowSizeToX($width, $height)```
 
 ## Click on the element
-> I click on the element $selector 
+> I click on the element $selector.
+
 Function: ```iClickOnTheElement(string $selector)```
 
 ## Wait X milliseconds for response
 Usually when creating automated tests we need a delay for loading and updating, this step defenition can take ```$delay```
 argument in milliseconds but by default it uses ```GenericFeatureContext::DELAY``` constant.
-> I wait $delay milliseconds for response 
+> I wait $delay milliseconds for response.
+
 Function: ```iWaitMillisecondsForResponse($delay = self::DELAY)```
 
 ## Hover on the element
-> I hover over the element $selector 
+> I hover over the element $selector.
+
 Function: ```iHoverOverTheElement(string $selector)```
 
 ## Fill input element by css selector with value
-> I fill in the input $selector with $value 
+> I fill in the input $selector with $value.
+
 Function: ```iFillInTheElement(string $selector, string $value)```
 
 ## Scroll window vertically to position
-> I scroll vertically to $yPos px 
+> I scroll vertically to $yPos px.
+
 Function: ```iScrollVerticallyToPx($yPos)```
 
 ## Scroll window horizontally to position
-> I scroll horizontally to $xPos px 
+> I scroll horizontally to $xPos px.
+
 Function: ```iScrollHorizontallyToPx($xPos)```
 
 ## Fill hidden input element with value
-> I fill hidden field $selector with $value 
+> I fill hidden field $selector with $value.
+
 Function: ```iFillHiddenFieldWith(string $selector, string $value)```
 
 ## Check checkbox by identifier
-> I check custom checkbox with $id 
+> I check custom checkbox with $id.
+
 Function: ```iCheckCustomCheckboxWith(string $id)```
 
 ## Drag element by CSS selector to target element by CSS selector
-> I drag element $selector to $target 
+> I drag element $selector to $target.
+
 Function: ```dragElementTo(string $selector, string $target)```
 
 ## Fill input element with value using javascript
-> I fill in the element $selector with value $value using js 
+> I fill in the element $selector with value $value using js.
+
 Function: ```iFillInTheElementUsingJs(string $selector, string $value)```
