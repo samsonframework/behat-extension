@@ -61,26 +61,41 @@ if yes then you can just extend you FeatureContext class in other created Featur
 ## Automatic after step screenshot creation
 Special Behat after step hook for screenshot creation after failed step. ```takeScreenShotAfterFailedStep()````
 
-## Find all DOM elements by CSS selector
-```findAllByCssSelector(string $selector):NodeElement[]```
+## Find all DOM elements by CSS selector ```findAllByCssSelector(string $selector):NodeElement[]```
 
-## Find DOM element by CSS selector
-```findByCssSelector(string $selector):NodeElement```
+## Find DOM element by CSS selector ```findByCssSelector(string $selector):NodeElement```
 
 ## Change browser window size
-> I set browser window size to $width x $height
+> I set browser window size to $width x $height ```iSetBrowserWindowSizeToX($width, $height)```
 
-```iSetBrowserWindowSizeToX($width, $height)```
-
-## Click on any element
-> I click on the element $selector
-
-```iClickOnTheElement(string $selector)```
+## Click on the element
+> I click on the element $selector ```iClickOnTheElement(string $selector)```
 
 ## Wait X milliseconds for response
 Usually when creating automated tests we need a delay for loading and updating, this step defenition can take ```$delay```
 argument in milliseconds but by default it uses ```GenericFeatureContext::DELAY``` constant.
-> I wait $delay milliseconds for response
+> I wait $delay milliseconds for response ```iWaitMillisecondsForResponse($delay = self::DELAY)```
 
-```iWaitMillisecondsForResponse($delay = self::DELAY)```
+## Hover on the element
+> I hover over the element $selector ```iHoverOverTheElement(string $selector)```
 
+## Fill input element by css selector with value
+>  I fill in the input $selector with $value ```iFillInTheElement(string $selector, string $value)```
+
+## Scroll window vertically to position
+> I scroll vertically to $yPos px ```iScrollVerticallyToPx($yPos)```
+
+## Scroll window horizontally to position
+> I scroll horizontally to $xPos px ```iScrollHorizontallyToPx($xPos)```
+
+## Fill hidden input element with value
+> I fill hidden field $selector with $value ```iFillHiddenFieldWith(string $selector, string $value)```
+
+## Check checkbox by identifier
+> I check custom checkbox with $id ```iCheckCustomCheckboxWith(string $id)```
+
+## Drag element by CSS selector to target element by CSS selector
+> I drag element $selector to $target ```dragElementTo(string $selector, string $target)```
+
+## Fill input element with value using javascript
+> I fill in the element $selector with value $value using js ```iFillInTheElementUsingJs(string $selector, string $value)```
