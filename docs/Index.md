@@ -55,7 +55,8 @@ for example if you want to create OrderFeatureContext class then you need to rep
 installation section of this document for new FeatureContext file except changing ```composer.json```.
 
 > You should decide if you need step definitions from ```\samsonframework\behatextension\GenericFeatureContext``` and
-> if yes then you can just extend you FeatureContext class in other created FeatureContext classes, this will give you ability to create generic project related steps definition in one place.
+if yes then you can just extend you FeatureContext class in other created FeatureContext classes, this will give you ability to create generic project related steps definition in one place.
+
 
 # Generic functions and step definitions
 
@@ -71,15 +72,18 @@ Special Behat after step hook for screenshot creation after failed step.
 
 ## Change browser window size
 > I set browser window size to $width x $height
+
 ```iSetBrowserWindowSizeToX($width, $height)```
 
 ## Click on any element
 > I click on the element $selector
+
 ```iClickOnTheElement(string $selector)```
 
 ## Wait X milliseconds for response
 Usually when creating automated tests we need a delay for loading and updating, this step defenition can take ```$delay```
 argument in milliseconds but by default it uses ```GenericFeatureContext::DELAY``` constant.
 > I wait $delay milliseconds for response
+
 ```iWaitMillisecondsForResponse($delay = self::DELAY)```
 
