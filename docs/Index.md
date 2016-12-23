@@ -52,10 +52,10 @@ Where you need to specify:
 For creating separate project related feature context to have a beautiful classes structure you should create 
 new feature context classes in the same namespace to give ability Behat to use composer PSR-4 autoloading feature,
 for example if you want to create OrderFeatureContext class then you need to repeat same steps as described in
-installation section of this document for new FeatureContext file except changing ```composer.json```. 
+installation section of this document for new FeatureContext file except changing ```composer.json```.
+
 > You should decide if you need step definitions from ```\samsonframework\behatextension\GenericFeatureContext``` and
-if yes then you can just extend you FeatureContext class in other created FeatureContext classes, this will give you ability to create generic project related
-steps definition in one place
+if yes then you can just extend you FeatureContext class in other created FeatureContext classes, this will give you ability to create generic project related steps definition in one place.
 
 # Generic functions and step definitions
 
