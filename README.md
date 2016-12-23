@@ -1,6 +1,6 @@
 # SamsonFramework Behat extension package
  
-SamsonFramework Behat extension package and generic feature context
+Behat extension package and generic feature context with usefull steps definitions and functions.
 
 [![Latest Stable Version](https://poser.pugx.org/samsonframework/behat-extension/v/stable.svg)](https://packagist.org/packages/samsonframework/behat-extension)
 [![Build Status](https://scrutinizer-ci.com/g/samsonframework/behat-extension/badges/build.png?b=master)](https://scrutinizer-ci.com/g/samsonframework/behat-extension/build-status/master)
