@@ -229,7 +229,7 @@ class GenericFeatureContext extends MinkContext
     }
 
     /**
-     * Fill in input with the provided info
+     * Fill in input with the provided info.
      *
      * @When I fill in the element :arg1 with value :arg2 using js
      *
@@ -238,6 +238,6 @@ class GenericFeatureContext extends MinkContext
      */
     public function iFillInTheElementUsingJs(string $selector, string $value)
     {
-        $this->getSession()->executeScript('document.querySelectorAll("' . $selector . '")[0].value="' . $value . '";');
+        $this->getSession()->executeScript('document.querySelectorAll("'.$selector.'")[0].value="'.$value.'";');
     }
 }
