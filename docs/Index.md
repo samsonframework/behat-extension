@@ -60,7 +60,7 @@ if yes then you can just extend you FeatureContext class in other created Featur
 # Generic functions and step definitions
 
 ## Automatic after step screenshot creation
-Special Beaht after step hook for screenshot creation after failed step.
+Special Behat after step hook for screenshot creation after failed step.
 ```takeScreenShotAfterFailedStep```
 
 ## Find all DOM elements by CSS selector
