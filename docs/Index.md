@@ -56,3 +56,30 @@ installation section of this document for new FeatureContext file except changin
 > You should decide if you need step definitions from ```\samsonframework\behatextension\GenericFeatureContext``` and
 if yes then you can just extend you FeatureContext class in other created FeatureContext classes, this will give you ability to create generic project related
 steps definition in one place
+
+# Generic functions and step definitions
+
+## Automatic after step screenshot creation
+Special Beaht after step hook for screenshot creation after failed step
+```takeScreenShotAfterFailedStep```
+
+## Find all DOM elements by CSS selector
+```findAllByCssSelector(string $selector):NodeElement[]```
+
+## Find DOM element by CSS selector
+```findByCssSelector(string $selector):NodeElement```
+
+## Change browser window size
+> I set browser window size to $width x $height
+```iSetBrowserWindowSizeToX($width, $height)```
+
+## Click on any element
+> I click on the element $selector
+```iClickOnTheElement(string $selector)```
+
+## Wait X milliseconds for response
+Ususally when creating automated tests we need a delay for loading and updating, this step defenition can take ```$delay```
+argument in milliseconds but by default it uses ```GenericFeatureContext::DELAY``` constant.
+> I wait $delay milliseconds for response
+```iWaitMillisecondsForResponse($delay = self::DELAY)```
+
