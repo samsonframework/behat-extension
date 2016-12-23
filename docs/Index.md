@@ -47,7 +47,6 @@ Where you need to specify:
  
  * Your ```base_url``` of configured domain for testing
  
- 
 # Creating other project related contexts
 For creating separate project related feature context to have a beautiful classes structure you should create 
 new feature context classes in the same namespace to give ability Behat to use composer PSR-4 autoloading feature,
@@ -57,12 +56,10 @@ installation section of this document for new FeatureContext file except changin
 > You should decide if you need step definitions from ```\samsonframework\behatextension\GenericFeatureContext``` and
 if yes then you can just extend you FeatureContext class in other created FeatureContext classes, this will give you ability to create generic project related steps definition in one place.
 
-
 # Generic functions and step definitions
 
 ## Automatic after step screenshot creation
-Special Behat after step hook for screenshot creation after failed step.
-```takeScreenShotAfterFailedStep```
+Special Behat after step hook for screenshot creation after failed step. ```takeScreenShotAfterFailedStep()````
 
 ## Find all DOM elements by CSS selector
 ```findAllByCssSelector(string $selector):NodeElement[]```
