@@ -227,4 +227,17 @@ class GenericFeatureContext extends MinkContext
 
         $this->iWaitMillisecondsForResponse(self::JS_DELAY);
     }
+
+    /**
+     * Fill in input with the provided info
+     *
+     * @When I fill in the element :arg1 with value :arg2 using js
+     *
+     * @param string $selector CSS element selector
+     * @param string $value    Element value for filling in
+     */
+    public function iFillInTheElementUsingJs(string $selector, string $value)
+    {
+        $this->getSession()->executeScript('document.querySelectorAll("' . $selector . '")[0].value="' . $value . '";');
+    }
 }
