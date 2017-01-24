@@ -52,11 +52,11 @@ class GenericFeatureContext extends MinkContext
      * @return bool
      * @throws \Exception
      */
-    public function spin(callable $lambda, $delay = self::SPIN_DELAY, $timeout = self::SPIN_TIMEOUT)
+    public function spin(callable $lambda, $data = null, $delay = self::SPIN_DELAY, $timeout = self::SPIN_TIMEOUT)
     {
         for ($i = 0; $i < $timeout; $i++) {
             try {
-                if ($lambda($this)) {
+                if ($lambda($this, $data)) {
                     return true;
                 }
             } catch (\Exception $e) {
