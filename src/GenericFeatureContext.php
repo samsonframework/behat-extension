@@ -19,6 +19,8 @@ class GenericFeatureContext extends MinkContext
     /** @var int UI javascript generic delay duration in milliseconds */
     const JS_DELAY = self::DELAY / 5;
     /** @var int UI spin function delay */
+    const SPIN_DELAY = self::DELAY / 3;
+    /** @var int UI spin function timeout */
     const SPIN_TIMEOUT = self::DELAY / 20;
 
     /** @var mixed */
@@ -44,14 +46,15 @@ class GenericFeatureContext extends MinkContext
      * Spin function to avoid Selenium fails.
      *
      * @param callable $lambda
-     * @param int $wait
+     * @param int      $delay
+     * @param int      $timeout
      *
      * @return bool
      * @throws \Exception
      */
-    public function spin(callable $lambda, $wait = self::SPIN_TIMEOUT)
+    public function spin(callable $lambda, $delay = self::DELAY, $timeout = self::SPIN_TIMEOUT)
     {
-        for ($i = 0; $i < $wait; $i++) {
+        for ($i = 0; $i < $timeout; $i++) {
             try {
                 if ($lambda($this)) {
                     return true;
@@ -60,7 +63,7 @@ class GenericFeatureContext extends MinkContext
                 // do nothing
             }
 
-            sleep(1);
+            usleep($delay);
         }
 
         $backtrace = debug_backtrace();
