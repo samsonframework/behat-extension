@@ -18,6 +18,8 @@ class GenericFeatureContext extends MinkContext
     const DELAY = 1000;
     /** @var int UI javascript generic delay duration in milliseconds */
     const JS_DELAY = self::DELAY / 5;
+    /** @var int UI spin function delay */
+    const SPIN_TIMEOUT = self::DELAY / 20;
 
     /** @var mixed */
     protected $session;
@@ -36,6 +38,37 @@ class GenericFeatureContext extends MinkContext
         $this->session = $session;
 
         ini_set('xdebug.max_nesting_level', '1000');
+    }
+
+    /**
+     * Spin function to avoid Selenium fails.
+     *
+     * @param callable $lambda
+     * @param int $wait
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function spin(callable $lambda, $wait = self::SPIN_TIMEOUT)
+    {
+        for ($i = 0; $i < $wait; $i++) {
+            try {
+                if ($lambda($this)) {
+                    return true;
+                }
+            } catch (\Exception $e) {
+                // do nothing
+            }
+
+            sleep(1);
+        }
+
+        $backtrace = debug_backtrace();
+
+        throw new \Exception(
+            "Timeout thrown by " . $backtrace[1]['class'] . "::" . $backtrace[1]['function'] . "()\n" .
+            $backtrace[1]['file'] . ", line " . $backtrace[1]['line']
+        );
     }
 
     /**
