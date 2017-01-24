@@ -16,12 +16,12 @@ class GenericFeatureContext extends MinkContext
 {
     /** @var int UI generic delay duration in milliseconds */
     const DELAY = 1000;
+    /** @var 0.1 sec spin delay */
+    const SPIN_DELAY = 100000;
     /** @var int UI javascript generic delay duration in milliseconds */
     const JS_DELAY = self::DELAY / 5;
-    /** @var int UI spin function delay */
-    const SPIN_DELAY = self::DELAY / 3;
-    /** @var int UI spin function timeout */
-    const SPIN_TIMEOUT = self::DELAY / 20;
+    /** @var int UI spin function timeout for ex 30*0.1s = 15 sec timeout */
+    const SPIN_TIMEOUT = 150;
 
     /** @var mixed */
     protected $session;
@@ -52,7 +52,7 @@ class GenericFeatureContext extends MinkContext
      * @return bool
      * @throws \Exception
      */
-    public function spin(callable $lambda, $delay = self::DELAY, $timeout = self::SPIN_TIMEOUT)
+    public function spin(callable $lambda, $delay = self::SPIN_DELAY, $timeout = self::SPIN_TIMEOUT)
     {
         for ($i = 0; $i < $timeout; $i++) {
             try {
