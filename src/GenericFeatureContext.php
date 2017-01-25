@@ -49,8 +49,9 @@ class GenericFeatureContext extends MinkContext
      * @param int      $delay
      * @param int      $timeout
      *
-     * @return bool
      * @throws \Exception
+     *
+     * @return bool
      */
     public function spin(callable $lambda, $data = null, $delay = self::SPIN_DELAY, $timeout = self::SPIN_TIMEOUT)
     {
@@ -69,8 +70,8 @@ class GenericFeatureContext extends MinkContext
         $backtrace = debug_backtrace();
 
         throw new \Exception(
-            "Timeout thrown by " . $backtrace[1]['class'] . "::" . $backtrace[1]['function'] . "()\n" .
-            $backtrace[1]['file'] . ", line " . $backtrace[1]['line']
+            'Timeout thrown by '.$backtrace[1]['class'].'::'.$backtrace[1]['function']."()\n".
+            $backtrace[1]['file'].', line '.$backtrace[1]['line']
         );
     }
 
