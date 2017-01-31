@@ -49,18 +49,20 @@ class GenericFeatureContext extends MinkContext
      * @param int      $delay
      * @param int      $timeout
      *
-     * @return bool
      * @throws \Exception
+     *
+     * @return bool
      */
     public function spin(callable $lambda, $data = null, $delay = self::SPIN_DELAY, $timeout = self::SPIN_TIMEOUT)
     {
+        $failedExceptions = [];
         for ($i = 0; $i < $timeout; $i++) {
             try {
                 if ($lambda($this, $data)) {
                     return true;
                 }
-            } catch (\Exception $e) {
-                // do nothing
+            } catch (\Exception $e) { // Gather unique exceptions
+                $failedExceptions[$e->getMessage()] = $e->getMessage();
             }
 
             usleep($delay);
@@ -69,8 +71,9 @@ class GenericFeatureContext extends MinkContext
         $backtrace = debug_backtrace();
 
         throw new \Exception(
-            'Timeout thrown by '.$backtrace[1]['class'].'::'.$backtrace[1]['function']."()\n".
-            (array_key_exists('file', $backtrace[1]) ? $backtrace[1]['file'].', line '.$backtrace[1]['line'] : '')
+            'Timeout thrown by '.$backtrace[1]['class'].'::'.$backtrace[1]['function']."()\n"
+            .(array_key_exists('file', $backtrace[1]) ? $backtrace[1]['file'].', line '.$backtrace[1]['line'] : '')."\n"
+            .implode("\n", $failedExceptions)
         );
     }
 
