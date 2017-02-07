@@ -46,7 +46,8 @@ class GenericFeatureContext extends MinkContext
      * Get Symfony service instance.
      *
      * @param string $serviceName Service identifier
-     * @param string $session Behat Symfony session name
+     * @param string $session     Behat Symfony session name
+     *
      * @return object Symfony service instance
      */
     public function getSymfonyService(string $serviceName, string $session = 'symfony2')
@@ -62,9 +63,9 @@ class GenericFeatureContext extends MinkContext
      * Spin function to avoid Selenium fails.
      *
      * @param callable $lambda
-     * @param null $data
-     * @param int $delay
-     * @param int $timeout
+     * @param null     $data
+     * @param int      $delay
+     * @param int      $timeout
      *
      * @throws \Exception
      *
