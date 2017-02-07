@@ -43,15 +43,32 @@ class GenericFeatureContext extends MinkContext
     }
 
     /**
+     * Get Symfony service instance.
+     *
+     * @param string $serviceName Service identifier
+     * @param string $session Behat Symfony session name
+     * @return object Symfony service instance
+     */
+    public function getSymfonyService(string $serviceName, string $session = 'symfony2')
+    {
+        return $this->getSession($session)
+            ->getDriver()
+            ->getClient()
+            ->getContainer()
+            ->get($serviceName);
+    }
+
+    /**
      * Spin function to avoid Selenium fails.
      *
      * @param callable $lambda
-     * @param int      $delay
-     * @param int      $timeout
-     *
-     * @throws \Exception
+     * @param null $data
+     * @param int $delay
+     * @param int $timeout
      *
      * @return bool
+     *
+     * @throws \Exception
      */
     public function spin(callable $lambda, $data = null, $delay = self::SPIN_DELAY, $timeout = self::SPIN_TIMEOUT)
     {
