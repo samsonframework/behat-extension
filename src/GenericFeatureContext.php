@@ -66,9 +66,9 @@ class GenericFeatureContext extends MinkContext
      * @param int $delay
      * @param int $timeout
      *
-     * @return bool
-     *
      * @throws \Exception
+     *
+     * @return bool
      */
     public function spin(callable $lambda, $data = null, $delay = self::SPIN_DELAY, $timeout = self::SPIN_TIMEOUT)
     {
