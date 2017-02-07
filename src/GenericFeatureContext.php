@@ -43,11 +43,28 @@ class GenericFeatureContext extends MinkContext
     }
 
     /**
+     * Get Symfony service instance.
+     *
+     * @param string $serviceName Service identifier
+     * @param string $session Behat Symfony session name
+     * @return object Symfony service instance
+     */
+    public function getSymfonyService(string $serviceName, string $session = 'symfony2')
+    {
+        return $this->getSession($session)
+            ->getDriver()
+            ->getClient()
+            ->getContainer()
+            ->get($serviceName);
+    }
+
+    /**
      * Spin function to avoid Selenium fails.
      *
      * @param callable $lambda
-     * @param int      $delay
-     * @param int      $timeout
+     * @param null $data
+     * @param int $delay
+     * @param int $timeout
      *
      * @throws \Exception
      *
@@ -55,13 +72,14 @@ class GenericFeatureContext extends MinkContext
      */
     public function spin(callable $lambda, $data = null, $delay = self::SPIN_DELAY, $timeout = self::SPIN_TIMEOUT)
     {
+        $failedExceptions = [];
         for ($i = 0; $i < $timeout; $i++) {
             try {
                 if ($lambda($this, $data)) {
                     return true;
                 }
-            } catch (\Exception $e) {
-                // do nothing
+            } catch (\Exception $e) { // Gather unique exceptions
+                $failedExceptions[$e->getMessage()] = $e->getMessage();
             }
 
             usleep($delay);
@@ -70,8 +88,9 @@ class GenericFeatureContext extends MinkContext
         $backtrace = debug_backtrace();
 
         throw new \Exception(
-            'Timeout thrown by '.$backtrace[1]['class'].'::'.$backtrace[1]['function']."()\n".
-            $backtrace[1]['file'].', line '.$backtrace[1]['line']
+            'Timeout thrown by '.$backtrace[1]['class'].'::'.$backtrace[1]['function']."()\n"
+            .(array_key_exists('file', $backtrace[1]) ? $backtrace[1]['file'].', line '.$backtrace[1]['line'] : '')."\n"
+            .implode("\n", $failedExceptions)
         );
     }
 
