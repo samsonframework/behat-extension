@@ -147,7 +147,7 @@ class GenericFeatureContext extends MinkContext
      *
      * @return \Behat\Mink\Element\NodeElement
      */
-    protected function findByCssSelector(string $selector) : NodeElement
+    public function findByCssSelector(string $selector) : NodeElement
     {
         return $this->findAllByCssSelector($selector)[0];
     }
