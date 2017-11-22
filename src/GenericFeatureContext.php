@@ -126,14 +126,21 @@ class GenericFeatureContext extends MinkContext
      */
     protected function findAllByCssSelector(string $selector)
     {
-        $session = $this->getSession();
+        $elements = [];
 
-        $elements = $session->getPage()->findAll('css', $this->fixStepArgument($selector));
+        $this->spin(function (MinkContext $context) use ($selector, &$elements) {
+            $session = $context->getSession();
 
-        // If element with current selector is not found then print error
-        if (count($elements) === 0) {
-            throw new \InvalidArgumentException(sprintf('Could not evaluate CSS selector: "%s"', $selector));
-        }
+            $elements = $session->getPage()->findAll('css', $context->fixStepArgument($selector));
+
+            // If element with current selector is not found then print error
+            if (count($elements) === 0) {
+                throw new \InvalidArgumentException(sprintf('Could not evaluate CSS selector: "%s"', $selector));
+            }
+
+            return true;
+        });
+
 
         return $elements;
     }
@@ -186,6 +193,21 @@ class GenericFeatureContext extends MinkContext
     {
         // Click on the founded element
         $this->findByCssSelector($selector)->click();
+    }
+
+    /**
+     * Checks, that current page PATH is equal to specified
+     * Example: Then I should be on "/"
+     * Example: And I should be on "/bats"
+     * Example: And I should be on "http://google.com"
+     *
+     * @param string $page Page for assertion
+     */
+    public function assertPageAddress($page) {
+        $this->spin(function (MinkContext $context) use ($page) {
+            $context->assertSession()->addressEquals($this->locatePath($page));
+            return true;
+        });
     }
 
     /**
@@ -282,7 +304,7 @@ class GenericFeatureContext extends MinkContext
     {
         $this->findByCssSelector($selector)->dragTo($this->findByCssSelector($target));
 
-        $this->iWaitMillisecondsForResponse(self::JS_DELAY);
+        // $this->iWaitMillisecondsForResponse(self::JS_DELAY);
     }
 
     /**
