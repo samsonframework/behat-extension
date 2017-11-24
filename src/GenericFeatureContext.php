@@ -26,6 +26,9 @@ class GenericFeatureContext extends MinkContext
     /** @var mixed */
     protected $session;
 
+    /** @var array Pages collection */
+    protected $pages = [];
+
     /**
      * Initializes context.
      *
@@ -318,5 +321,32 @@ class GenericFeatureContext extends MinkContext
     public function iFillInTheElementUsingJs(string $selector, string $value)
     {
         $this->getSession()->executeScript('document.querySelectorAll("'.$selector.'")[0].value="'.$value.'";');
+    }
+
+    /**
+     * @Given /^I should be on "(?P<page>(?:[^"]|\\")*)" page$/
+     *
+     * @param string $page Page name
+     *
+     * @throws \Exception If page is not defined
+     */
+    public function iShouldBeOnPage(string $page)
+    {
+        $page = strtolower(trim($page));
+        if (array_key_exists($page, $this->pages)) {
+            $this->assertPageAddress($this->pages[$page]);
+        } else {
+            throw new \Exception('Page [' . $page . '] is not defined');
+        }
+    }
+
+    /**
+     * Add pages collection.
+     *
+     * @param array $pages Pages collection
+     */
+    public function addPages(array $pages)
+    {
+        $this->pages = array_merge($this->pages, $pages);
     }
 }
